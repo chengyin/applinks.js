@@ -15,7 +15,7 @@
     "deeplinking"
   ],
   "author": "Chengyin Liu <chengyin.liu@gmail.com>",
-  "license": "MIT",
+  "license": "NCSA",
   "bugs": {
     "url": "https://github.com/chengyin/applinks.js/issues"
   },
