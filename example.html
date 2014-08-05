@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="al:ios:url" content="applinks://docs" />
+    <meta property="al:ios:app_store_id" content="12345" />
+    <meta property="al:ios:app_name" content="App Links" />
+    <meta property="al:android:url" content="applinks://docs" />
+    <meta property="al:android:app_name" content="App Links" />
+    <meta property="al:android:package" content="org.applinks" />
+    <meta property="al:web:url"
+          content="http://applinks.org/documentation" />
+    <script src="./applinks.js"></script>
+    <style>
+      body {font: 200 1.5em 'Helvetica Neue', sans-serif; padding: 10%;}
+      pre {font-size: 0.75em; background: #f4f4f4; color: #222; margin: 3em 0; padding: 5%; overflow: auto}
+      code {font-weight: bold;}
+    </style>
+</head>
+<body>
+  <p>
+    Hello, this device is identified as <code id="device"></code>.
+  </p>
+  <p>
+    The url for this device is <code id="url"></code>.
+  </p>
+  <p>
+    The fallback url for this device is <code id="fallback"></code>.
+  </p>
+  <p>
+    The fallback url with disabled store redirection is <code id="fallback-web"></code>.
+  </p>
+
+  <pre id="code"></pre>
+
+  <script>
+    (function() {
+      function htmlEscape(str) {
+        return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+      }
+
+      var meta = document.querySelectorAll('meta[property^="al:"]'),
+          metaHTML = Array.prototype.slice.call(meta, 0)
+                     .map(function(m) { return m.outerHTML; }).join('\n'),
+
+          applinks = new AppLinks(),
+          applinksNoStore = new AppLinks({redirectToStore: false}),
+
+          device = applinks.getDeviceType(),
+          url = applinks.getAppUrl(),
+          fallback = applinks.getFallbackUrl(),
+          fallbackWeb = applinksNoStore.getFallbackUrl(),
+
+          codeElem = document.getElementById('code'),
+          deviceElem = document.getElementById('device'),
+          urlElem = document.getElementById('url'),
+          fallbackElem = document.getElementById('fallback'),
+          fallbackWebElem = document.getElementById('fallback-web'),
+
+          notFound = '(not found)';
+
+      codeElem.innerHTML = htmlEscape(metaHTML);
+      deviceElem.innerHTML = device || notFound;
+      urlElem.innerHTML = url || notFound;
+      fallbackElem.innerHTML = fallback || notFound;
+      fallbackWebElem.innerHTML = fallbackWeb || notFound;
+    } ());
+  </script>
+</body>
+</html>
