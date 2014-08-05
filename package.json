@@ -1,7 +1,7 @@
 {
   "name": "applinks.js",
   "version": "0.1.0",
-  "description": "applinks.js ===========",
+  "description": "Provide App Links metadata support for browsers",
   "main": "applinks.js",
   "scripts": {
     "test": "jest"
