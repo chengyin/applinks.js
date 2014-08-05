@@ -1,0 +1,26 @@
+{
+  "name": "applinks.js",
+  "version": "0.1.0",
+  "description": "applinks.js ===========",
+  "main": "applinks.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chengyin/applinks.js.git"
+  },
+  "keywords": [
+    "applinks",
+    "deeplinking"
+  ],
+  "author": "Chengyin Liu <chengyin.liu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chengyin/applinks.js/issues"
+  },
+  "homepage": "https://github.com/chengyin/applinks.js",
+  "devDependencies": {
+    "jest-cli": "^0.1.17"
+  }
+}
