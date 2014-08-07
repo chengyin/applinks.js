@@ -25,10 +25,11 @@
       for (a = 1; a < arguments.length; a++) {
         obj = arguments[a];
         if (typeof obj === 'object') {
-          for (key in obj)
+          for (key in obj) {
             if (obj.hasOwnProperty(key)) {
               result[key] = obj[key];
             }
+          }
         }
       }
 
@@ -226,18 +227,19 @@
     },
 
     autoLink: function() {
-      var url = this.getAppUrl();
-
       this.redirect(this.getAppUrl(), this.getFallbackUrl());
     }
   };
 
   // export
-  if (typeof define === 'function'){ // AMD
+  if (typeof define === 'function') {
+    // AMD
     define('applinks', [], function() {return AppLinks;});
-  } else if (typeof module !== 'undefined' && module.exports) { // Node.js
+  } else if (typeof module !== 'undefined' && module.exports) {
+    // Node.js
     module.exports = AppLinks;
-  } else { // Browser
+  } else {
+    // Browser
     window.AppLinks = AppLinks;
   }
 } ());
