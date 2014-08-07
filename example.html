@@ -44,11 +44,23 @@
                 .replace(/>/g, '&gt;');
       }
 
-      var meta = document.querySelectorAll('meta[property^="al:"]'),
-          metaHTML = Array.prototype.slice.call(meta, 0)
-                     .map(function(m) { return m.outerHTML; }).join('\n'),
+      var meta, metaHTML = [];
 
-          applinks = new AppLinks(),
+      if (document.querySelectorAll) {
+        meta = document.querySelectorAll('meta[property^="al:"]');
+      } else {
+        meta = document.getElementsByTagName('meta');
+      }
+
+      metaHTML = [];
+
+      for (var m in meta) {
+        metaHTML.push(meta[m].outerHTML);
+      }
+
+      metaHTML = metaHTML.join('\n');
+
+      var applinks = new AppLinks(),
           applinksNoStore = new AppLinks({redirectToStore: false}),
 
           device = applinks.getDeviceType(),
