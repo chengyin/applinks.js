@@ -75,6 +75,8 @@ var testData = {
     'windows_phone': 'http://windowsphone.com/s?appId=a14e93aa-27c7-df11-a844-00237de2db9f'
   },
 
+  androidLinkWithReferrer: 'market://details?id=org.applinks&referrer=docs/android',
+
   userAgents: {
     'iphone': 'Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53',
     'ipad': 'Mozilla/5.0 (iPad; CPU OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53',
@@ -201,6 +203,17 @@ describe('applinks.js', function() {
       });
 
       expect(applinks.getStoreUrl()).toBeNull();
+    });
+
+    it('should support referrer parameter for Google Play Store', function() {
+      addMetaTags(testData.allProperties);
+
+      applinks = new AppLinks({
+        setPlayStoreReferrer: true,
+        userAgent: testData.userAgents.android
+      });
+
+      expect(applinks.getStoreUrl()).toEqual(testData.androidLinkWithReferrer);
     });
   });
 

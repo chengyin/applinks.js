@@ -9,7 +9,8 @@
   AppLinks.prototype = {
     options: {
       redirectToStore: true,
-      userAgent: navigator.userAgent
+      userAgent: navigator.userAgent,
+      setPlayStoreReferrer: false
     },
 
     deviceRE: /(ios|iphone|ipad|android|windows phone)/i,
@@ -20,7 +21,7 @@
 
     extend: function() {
       var result = arguments[0],
-      a, key, obj;
+        a, key, obj;
 
       for (a = 1; a < arguments.length; a++) {
         obj = arguments[a];
@@ -76,6 +77,10 @@
       }
 
       this.applinks = results.al || {};
+    },
+
+    removeUrlProtocol: function(url) {
+      return url.replace(/^[a-zA-Z0-9+-.]+:\/\//, '');
     },
 
     getDeviceType: function() {
@@ -158,7 +163,7 @@
           urlConstructor = this.getStoreUrlConstructor();
 
       if (urlConstructor) {
-        return urlConstructor(appId, appName);
+        return urlConstructor.call(this, appId, appName);
       } else {
         return null;
       }
@@ -174,7 +179,23 @@
     },
 
     getPlayStoreUrl: function(packageName) {
-      return packageName ? ('market://details?id=' + packageName) : null;
+      var url, link;
+
+      if (packageName) {
+        url = 'market://details?id=' + packageName;
+
+        if (this.applinks.android && this.applinks.android.url) {
+          link = this.applinks.android.url;
+        }
+
+        if (link && this.options.setPlayStoreReferrer) {
+          url += '&referrer=' + this.removeUrlProtocol(link);
+        }
+
+        return url;
+      }
+
+      return null;
     },
 
     getWindowsPhoneStoreUrl: function(appId) {
