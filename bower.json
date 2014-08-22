@@ -1,0 +1,27 @@
+{
+  "name": "applinks.js",
+  "main": "applinks.js",
+  "version": "0.1.2",
+  "homepage": "https://github.com/chengyin/applinks.js",
+  "authors": [
+    "Chengyin Liu <chengyin.liu@gmail.com>"
+  ],
+  "description": "Provide App Links metadata support for browsers",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "applinks",
+    "deeplinking"
+  ],
+  "license": "NCSA",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
